@@ -6,23 +6,13 @@ import "math"
 // (µ and σ) is determined by the skills of the players that form the team.
 type Team struct {
 	players []Player
-
-	mu  float64
-	sig float64
 }
 
+// NewTeam creates a team from a slice of players.
 func NewTeam(p []Player) (t Team) {
 	t.players = p
 	t.updateSkill()
 	return
-}
-
-func (t *Team) GetMu() float64 {
-	return t.mu
-}
-
-func (t *Team) GetSigma() float64 {
-	return t.sig
 }
 
 // GetCurrentSkill returns the conservative skill estimate of the team. This
@@ -35,11 +25,11 @@ func (t *Team) GetCurrentSkill() float64 {
 // updateSkill must be called everytime player composition changes or skills of
 // players change (e.g. after a game).
 func (t *Team) updateSkill() {
-	for _,p := range t.players {
+	for _, p := range t.players {
 		t.mu += p.mu
 		t.sig += p.sig * p.sig
 	}
-	
+
 	t.sig = math.Sqrt(t.sig)
 	return
 }
