@@ -1,12 +1,14 @@
 package trueskill
 
-const (
+import "math"
+
+var (
 	// DefMu specifies the default mean value (mu) of a new player
-	DefMu float64 = 25
+	DefMu = 25.0
 
 	// DefSig specifies the default standard deviation (sigma) of a new
 	// player
-	DefSig float64 = 25 / 3
+	DefSig = math.Sqrt(DefMu)
 )
 
 // Player is a struct that reflects one contestant in a game. The skill level
@@ -21,6 +23,12 @@ type Player struct {
 // estimation.
 func NewDefaultPlayer() (p Player) {
 	return Player{NewGaussian(DefMu, DefSig)}
+}
+
+// NewPlayer creates and returns a Player with a specified skill level.
+func NewPlayer(mu, sigma float64) (p Player) {
+	p.g = NewGaussian(mu, sigma)
+	return
 }
 
 // GetCurrentSkill returns the conservative skill estimate of the player. This
