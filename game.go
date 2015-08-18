@@ -2,7 +2,14 @@ package trueskill
 
 import "math"
 
-var (
+const (
+	// DefMu specifies the default mean value (mu) of a new player
+	DefMu = 25.0
+
+	// DefSig specifies the default standard deviation (sigma) of a new
+	// player
+	DefSig = DefMu / 3
+
 	// DefBeta defines the default beta for games. This specifies how much
 	// difference in skill relates to a 80% chance to win for the higher
 	// ranked player.

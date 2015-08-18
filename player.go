@@ -1,16 +1,5 @@
 package trueskill
 
-import "math"
-
-var (
-	// DefMu specifies the default mean value (mu) of a new player
-	DefMu = 25.0
-
-	// DefSig specifies the default standard deviation (sigma) of a new
-	// player
-	DefSig = math.Sqrt(DefMu)
-)
-
 // Player is a struct that reflects one contestant in a game. The skill level
 // is assumed to be bell shaped (normal or Gaussian distributed) with a peak
 // point µ (mu) and a spread σ (sigma). The actual skill of the player is
