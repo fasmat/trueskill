@@ -28,6 +28,13 @@ func (g *Gaussian) GetSigma() float64 {
 	return math.Sqrt(1 / g.pi)
 }
 
+// GetConservativeEstimate returns the conservative skill estimate of the
+// player. This estimate is µ - 3σ. With 99.7% accuracy the actual skill is
+// higher than this value.
+func (g *Gaussian) GetConservativeEstimate() float64 {
+	return g.GetMu() - 3*g.GetSigma()
+}
+
 // Mul multiplies two Gaussian distributions and returns the result as a new
 // Gaussian
 func (g *Gaussian) Mul(fac Gaussian) Gaussian {

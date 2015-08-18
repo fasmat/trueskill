@@ -30,10 +30,3 @@ func NewPlayer(mu, sigma float64) (p Player) {
 	p.g = NewGaussian(mu, sigma)
 	return
 }
-
-// GetCurrentSkill returns the conservative skill estimate of the player. This
-// estimate is µ - 3σ. With 99.7% accuracy the actual skill is higher than
-// this value.
-func (p *Player) GetCurrentSkill() float64 {
-	return p.g.GetMu() - 3*p.g.GetSigma()
-}
