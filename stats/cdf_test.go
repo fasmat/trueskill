@@ -1,4 +1,4 @@
-package trueskill
+package stats
 
 import (
 	"math"
