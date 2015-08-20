@@ -5,10 +5,6 @@ import (
 	"testing"
 )
 
-const (
-	errTolerance float64 = 1e-6
-)
-
 func TestTwoPlayerNotDraw(t *testing.T) {
 	player1 := NewDefaultPlayer(1)
 	player2 := NewDefaultPlayer(2)
