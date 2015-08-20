@@ -11,7 +11,7 @@ func TestSortByRank(t *testing.T) {
 		NewEmptyTeam()}
 	rankOut := []int{1, 1, 3, 4}
 
-	data, rank := sortTeamByRank(dataIn, rankIn)
+	data, rank := sortTeamsByRank(dataIn, rankIn)
 
 	if len(data) != len(dataOut) {
 		t.Error("Lost data values during sorting. Expected",
