@@ -44,6 +44,16 @@ func (p *Player) UpdateSkill(g Gaussian) {
 	return
 }
 
+// GetMu is a convenience wrapper for Gaussian.GetMu()
+func (p *Player) GetMu() float64 {
+	return p.g.GetMu()
+}
+
+// GetSigma is a convenience wrapper for Gaussian.GetSigma()
+func (p *Player) GetSigma() float64 {
+	return p.g.GetSigma()
+}
+
 func (p *Player) String() (s string) {
 	g := p.GetGaussian()
 
