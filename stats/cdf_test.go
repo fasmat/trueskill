@@ -31,7 +31,7 @@ func TestNormalCDF(t *testing.T) {
 	for i := range in {
 		o := NormalCDF(in[i])
 
-		if math.Abs(o-out[i]) > 1e-12 {
+		if math.Abs(o-out[i]) > errTolerance {
 			t.Errorf("NormalCDF(%f) == %f, want %f", in[i], o, out[i])
 		}
 	}
@@ -63,7 +63,7 @@ func TestInverseCDF(t *testing.T) {
 	for i := range in {
 		o := InverseCDF(in[i])
 
-		if math.Abs(o-out[i]) > 1e-12 {
+		if math.Abs(o-out[i]) > errTolerance {
 			t.Errorf("InverseCDF(%f) == %f, want %f", in[i], o, out[i])
 		}
 	}

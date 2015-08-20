@@ -10,7 +10,7 @@ import "math"
 //  nPlayers defines how many players against each other, independent of team
 //    composition (e.g. 2 for chess, 3 for skat or 22 for soccer)
 func GetDrawMargin(pDraw, beta float64, nPlayers uint) float64 {
-	return 2 * InverseCDF(((pDraw+1)/2)*math.Sqrt(float64(nPlayers))) * beta
+	return InverseCDF((pDraw+1)/2) * math.Sqrt(float64(nPlayers)) * beta
 }
 
 // GetDrawProbability returns the draw probability given a draw margin.
