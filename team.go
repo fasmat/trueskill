@@ -20,6 +20,17 @@ func NewTeam(p []Player) (t Team) {
 	return
 }
 
+// Size returns the number of players in the team
+func (t *Team) Size() int {
+	return len(t.players)
+}
+
+// AddPlayer adds a single player to the team.
+func (t *Team) AddPlayer(p Player) {
+	t.players = append(t.players, p)
+	return
+}
+
 // AddPlayers adds players to the team.
 func (t *Team) AddPlayers(p []Player) {
 	t.players = append(t.players, p...)
