@@ -41,3 +41,21 @@ func (t *Team) AddPlayers(p []Player) {
 func (t *Team) GetPlayers() (p []Player) {
 	return t.players
 }
+
+// TODO: Add functions to remove players from a team
+
+// GetMu returns the sum of all means of the team
+func (t *Team) GetMu() (sum float64) {
+	for _, p := range t.players {
+		sum += p.GetMu()
+	}
+	return
+}
+
+// GetVar returns the combined variance of the team
+func (t *Team) GetVar() (sum float64) {
+	for _, p := range t.players {
+		sum += p.GetSigma() * p.GetSigma()
+	}
+	return
+}
