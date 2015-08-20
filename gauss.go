@@ -12,8 +12,8 @@ type Gaussian struct {
 // standard deviation (sigma)
 func NewGaussian(mu, sigma float64) Gaussian {
 	g := Gaussian{
-		pi:  1 / sigma * sigma,
-		tau: mu / sigma * sigma,
+		pi:  1.0 / (sigma * sigma),
+		tau: mu / (sigma * sigma),
 	}
 	return g
 }
@@ -25,7 +25,7 @@ func (g *Gaussian) GetMu() float64 {
 
 // GetSigma returns the standard deviation of a gaussian distribution
 func (g *Gaussian) GetSigma() float64 {
-	return math.Sqrt(1 / g.pi)
+	return math.Sqrt(1.0 / g.pi)
 }
 
 // GetConservativeEstimate returns the conservative skill estimate of the
