@@ -1,5 +1,10 @@
 package trueskill
 
+import (
+	"errors"
+	"math"
+)
+
 const (
 	// DefMu specifies the default mean value (mu) of a new player
 	DefMu = 25.0
@@ -47,8 +52,36 @@ func NewGame(beta, tau, pDraw float64) Game {
 	}
 }
 
-// CalculateNewRatings processes teams/players based on their ranks and
+// CalcNewRatings processes teams/players based on their ranks and
 // updates their skills accordingly
-func (g *Game) CalculateNewRatings(teams []Team, ranks []int) (err error) {
+func (g *Game) CalcNewRatings(teams []Team, ranks []int) (err error) {
+	// TODO: implement me
+	return
+}
+
+// CalcMatchQuality returns a value that indicates the balance of a game
+// between the provided teams (0.0 = imbalanced, 1.0 = perfectly balanced)
+func (g *Game) CalcMatchQuality(teams []Team) (result float64, err error) {
+	if len(teams) > 2 {
+		err = errors.New("CalcMatchQuality does not support more than 2 teams yet.")
+		return
+	}
+
+	nPlayers := float64(teams[0].Size() + teams[1].Size())
+
+	t1Mean := teams[0].GetMu()
+	t1Var := teams[0].GetVar()
+	t2Mean := teams[1].GetMu()
+	t2Var := teams[1].GetVar()
+
+	sqrt := math.Sqrt(
+		(nPlayers * g.beta * g.beta) /
+			(nPlayers*g.beta*g.beta + t1Var + t2Var))
+
+	exp := math.Exp(
+		-1 * (t1Mean - t2Mean) * (t1Mean - t2Mean) /
+			(2 * (nPlayers*g.beta*g.beta + t1Var + t2Var)))
+
+	result = sqrt * exp
 	return
 }
