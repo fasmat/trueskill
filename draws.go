@@ -2,7 +2,8 @@ package trueskill
 
 import (
 	"math"
-	"trueskill/stats"
+
+	"github.com/fasmat/trueskill/stats"
 )
 
 // GetDrawMargin returns the draw margin epsilon given a draw probability.
