@@ -54,8 +54,8 @@ func NewGame(beta, tau, pDraw float64) Game {
 
 // CalcNewRatings processes teams/players based on their ranks and
 // updates their skills accordingly
-func (g *Game) CalcNewRatings(teams []Team, ranks []int) (err error) {
-	// TODO: implement me
+func (g *Game) CalcNewRatings(teams []Team, ranks []int) (t []Team, err error) {
+	// TODO
 	return
 }
 

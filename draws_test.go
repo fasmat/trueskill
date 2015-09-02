@@ -9,11 +9,11 @@ const (
 	errTolerance float64 = 1e-06
 )
 
-func TestDrawMargin(t *testing.T) {
+func TestDrawMarginFromDrawProbability(t *testing.T) {
 	beta := 25.0 / 6
 
 	pDraw := []float64{
-		0.1,
+		0.10,
 		0.25,
 		0.33}
 	epsilon := []float64{
