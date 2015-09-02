@@ -59,3 +59,11 @@ func (t *Team) GetVar() (sum float64) {
 	}
 	return
 }
+
+func (t *Team) String() (s string) {
+	s = "Team of " + string(len(t.GetPlayers())) + " Players:"
+	for _, p := range t.GetPlayers() {
+		s += "\t" + p.String()
+	}
+	return
+}

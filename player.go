@@ -1,45 +1,55 @@
 package trueskill
 
-import "strconv"
+import (
+	"fmt"
+
+	"github.com/fasmat/trueskill/stats"
+)
 
 // Player is a struct that reflects one contestant in a game. The skill level
 // is assumed to be bell shaped (normal or Gaussian distributed) with a peak
 // point µ (mu) and a spread σ (sigma). The actual skill of the player is
 // therefore assumed to be within µ +/- 3σ with 99.7% accuracy.
 type Player struct {
-	id uint
-	g  Gaussian
+	id int
+	g  stats.Gaussian
 }
 
 // NewDefaultPlayer creates and returns a Player with default values for skill
 // estimation.
-func NewDefaultPlayer(id uint) Player {
+func NewDefaultPlayer(id int) Player {
 	return Player{
 		id: id,
-		g:  NewGaussian(DefMu, DefSig),
+		g:  stats.NewGaussian(DefMu, DefSig),
 	}
 }
 
 // NewPlayer creates and returns a Player with a specified skill level.
-func NewPlayer(id uint, mu, sigma float64) Player {
+func NewPlayer(id int, mu, sigma float64) Player {
 	return Player{
 		id: id,
-		g:  NewGaussian(mu, sigma),
+		g:  stats.NewGaussian(mu, sigma),
 	}
 }
 
 // GetGaussian returns the Gaussian associated with the players skill.
-func (p *Player) GetGaussian() Gaussian {
+func (p *Player) GetGaussian() stats.Gaussian {
 	return p.g
 }
 
 // GetID returns the ID of the player
-func (p *Player) GetID() uint {
+func (p *Player) GetID() int {
 	return p.id
 }
 
+// GetSkill returns the skill of the player as single number
+func (p *Player) GetSkill() float64 {
+	g := p.GetGaussian()
+	return g.GetConservativeEstimate()
+}
+
 // UpdateSkill updates the skill rating of player to the provided Gaussian.
-func (p *Player) UpdateSkill(g Gaussian) {
+func (p *Player) UpdateSkill(g stats.Gaussian) {
 	p.g = g
 	return
 }
@@ -54,14 +64,15 @@ func (p *Player) GetSigma() float64 {
 	return p.g.GetSigma()
 }
 
-func (p *Player) String() (s string) {
-	g := p.GetGaussian()
+// GetVar is a convenience wrapper for Gaussian.GetVar()
+func (p *Player) GetVar() float64 {
+	return p.g.GetVar()
+}
 
+func (p *Player) String() (s string) {
 	s = "Player [" + string(p.id)
 	s += "] Skill-Estimate:"
-	s += strconv.FormatFloat(g.GetConservativeEstimate(), 'f', 3, 64)
-	s += " (mu: " + strconv.FormatFloat(g.GetMu(), 'f', 3, 64)
-	s += " sig: " + strconv.FormatFloat(g.GetSigma(), 'f', 3, 64)
-	s += ")"
+	s += fmt.Sprintf(" %2.4f", p.GetSkill())
+	s += fmt.Sprintf("(μ=%2.4f, σ=%2.4f)", p.GetMu(), p.GetSigma())
 	return
 }

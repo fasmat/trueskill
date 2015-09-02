@@ -6,7 +6,7 @@ import (
 )
 
 const (
-	errTolerance float64 = 1e-06
+	ErrTolerance float64 = 1e-06
 )
 
 func TestDrawMarginFromDrawProbability(t *testing.T) {
@@ -24,7 +24,7 @@ func TestDrawMarginFromDrawProbability(t *testing.T) {
 
 	for i, p := range pDraw {
 		e := GetDrawMargin(p, beta, 2)
-		if math.Abs(e-epsilon[i]) > errTolerance {
+		if math.Abs(e-epsilon[i]) > ErrTolerance {
 			t.Error("Expected draw margin for", p, "=", epsilon[i], "got", e)
 		}
 	}
