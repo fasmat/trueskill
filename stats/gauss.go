@@ -1,4 +1,4 @@
-package trueskill
+package stats
 
 import (
 	"fmt"
@@ -61,7 +61,7 @@ func (g *Gaussian) GetConservativeEstimate() float64 {
 
 // String can be used to print a Gaussian
 func (g *Gaussian) String() string {
-	text := fmt.Sprintf("μ=%1.4f, σ=%1.4f", g.GetMu(), g.GetSigma())
+	text := fmt.Sprintf("μ=%2.4f, σ=%2.4f", g.GetMu(), g.GetSigma())
 	return text
 }
 

@@ -2,10 +2,30 @@ package stats
 
 import "math"
 
-// NormalCDF calculates the Cumulative Distribution Function for the
-// standardized normal distribution
+// NormGaussAt returns the probability of x in a standardized normal
+// distribution
+func NormGaussAt(x float64) float64 {
+	return GaussAt(x, 0, 1)
+}
+
+// GaussAt returns the probability of x for the normal distribution with mean mu
+// and standard deviation sigma
+func GaussAt(x, mu, sigma float64) float64 {
+	multiplier := 1.0 / (sigma * math.Sqrt(2*math.Pi))
+	expPart := math.Exp((-1.0 * math.Pow(x-mu, 2.0)) / (2 * sigma * sigma))
+	return multiplier * expPart
+}
+
+// NormalCDF calculates the Cumulative Distribution function for the
+// standardized normal distribution.
 func NormalCDF(x float64) float64 {
-	return (1.0 / 2.0) * (1 + math.Erf(x/math.Sqrt2))
+	return CDF(x, 0, 1)
+}
+
+// CDF calculates the cumulative distribution function for any standard
+// distribution.
+func CDF(x, mu, sigma float64) float64 {
+	return 0.5 * (1 + math.Erf((x-mu)/(sigma*math.Sqrt2)))
 }
 
 // InverseCDF calculates the Inverse Cumulative Distribution Function for the
@@ -15,7 +35,10 @@ func NormalCDF(x float64) float64 {
 func InverseCDF(p float64) float64 {
 	var r, x, pp, dp float64
 
-	dp = p - 0.5
+	if p > 1 || p < 0 {
+		return math.NaN()
+	}
+
 	switch p {
 	case 1.0:
 		return math.Inf(1)
@@ -23,6 +46,7 @@ func InverseCDF(p float64) float64 {
 		return math.Inf(-1)
 	}
 
+	dp = p - 0.5
 	if math.Abs(dp) <= 0.425 {
 		x = small(dp)
 		return x
