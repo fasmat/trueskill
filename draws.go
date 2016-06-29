@@ -25,5 +25,5 @@ func GetDrawMargin(pDraw, beta float64, nPlayers uint) float64 {
 //  nPlayers defines how many players against each other, independent of team
 //    composition (e.g. 2 for chess, 3 for skat or 22 for soccer)
 func GetDrawProbability(epsilon, beta float64, nPlayers uint) float64 {
-	return 2 * stats.NormalCDF(epsilon/math.Sqrt(float64(nPlayers)*beta)-1)
+	return 2*stats.NormalCDF(epsilon/(math.Sqrt(float64(nPlayers))*beta)) - 1
 }
