@@ -1,0 +1,86 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/go
+{
+	"name": "Ubuntu",
+	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+	"build": {
+		"dockerfile": "Dockerfile",
+		// Update 'VARIANT' to pick an Ubuntu version: noble / ubuntu-24.04, jammy / ubuntu-22.04, focal / ubuntu-20.04
+		"args": { "VARIANT": "noble" }
+	},
+	"runArgs": [
+		"--init",
+		"--cap-add=SYS_PTRACE",
+		"--security-opt",
+		"seccomp=unconfined"
+	],
+	"mounts": [
+		"type=bind,source=${localEnv:HOME}${localEnv:USERPROFILE}/.ssh,destination=/home/vscode/.ssh",
+		"type=bind,source=${localEnv:HOME}${localEnv:USERPROFILE}/.gitignore_global,destination=/home/vscode/.gitignore_global"
+	],
+	"features": {
+		"ghcr.io/devcontainers/features/docker-in-docker:2": {
+			"version": "28.1"
+		},
+		"ghcr.io/devcontainers/features/github-cli:1": {
+			"version": "2.72.0"
+		},
+		"ghcr.io/devcontainers/features/go:1": {
+			"version": "1.24.3"
+		},
+		"ghcr.io/dhoeric/features/act:1": {
+			"version": "0.2.77"
+		}
+	},
+
+	// Features to add to the dev container. More info: https://containers.dev/features.
+	// "features": {},
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	// "postCreateCommand": "go version",
+
+	// Configure tool-specific properties.
+	"customizations": {
+		// Configure properties specific to VS Code.
+		"vscode": {
+			// Set *default* container specific settings.json values on container create.
+			"settings": {
+				"editor.formatOnSave": true,
+				"editor.rulers": [
+					120
+				],
+				"files.autoSave": "afterDelay",
+				"gitlens.terminal.overrideGitEditor": false,
+				"go.formatTool": "gofumpt",
+				"go.formatFlags": [
+					"-extra"
+				],
+				"go.lintTool": "golangci-lint",
+				"go.lintFlags": [
+					"--fast"
+				],
+				"go.toolsManagement.autoUpdate": true,
+				"go.toolsManagement.checkForUpdates": "local",
+				"go.useLanguageServer": true
+			},
+
+			// Add the IDs of extensions you want installed when the container is created.
+			"extensions": [
+				"streetsidesoftware.code-spell-checker",
+				"ms-azuretools.vscode-docker",
+				"github.vscode-github-actions",
+				"github.copilot",
+				"eamodio.gitlens",
+				"davidanson.vscode-markdownlint",
+				"vscode-icons-team.vscode-icons",
+				"redhat.vscode-yaml"
+			]
+		}
+	}
+
+	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+	// "remoteUser": "root"
+}

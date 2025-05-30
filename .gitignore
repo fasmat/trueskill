@@ -1,3 +1,32 @@
-# IntelliJ files
-*.iml
-.idea
+# If you prefer the allow list template instead of the deny list, see community template:
+# https://github.com/github/gitignore/blob/main/community/Golang/Go.AllowList.gitignore
+#
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# bin directory
+bin/
+
+# Test binary, built with `go test -c`
+*.test
+
+# Test data directory, created from fuzz tests
+testdata/
+
+# Output of the go coverage tool, specifically when used with LiteIDE
+*.out
+coverage.txt
+
+# Dependency directories (remove the comment below to include it)
+vendor/
+
+# Go workspace file
+go.work
+go.work.sum
+
+# env file
+.env
