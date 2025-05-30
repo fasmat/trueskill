@@ -43,7 +43,6 @@ func TestGetDrawProbabilityFromDrawMargin(t *testing.T) {
 		1.87760059883033,
 		2.5111010132487492,
 	}
-
 	pDraw := []float64{
 		0.10,
 		0.25,
@@ -55,6 +54,5 @@ func TestGetDrawProbabilityFromDrawMargin(t *testing.T) {
 		if math.Abs(p-pDraw[i]) > ErrTolerance {
 			t.Error("Expected draw probability for", e, "=", pDraw[i], "got", p)
 		}
-
 	}
 }

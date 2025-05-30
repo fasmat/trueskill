@@ -42,7 +42,7 @@ func (t *Team) GetPlayers() (p []Player) {
 	return t.players
 }
 
-// TODO: Add functions to remove players from a team
+// TODO(mafa): Add functions to remove players from a team
 
 // GetMu returns the sum of all means of the team
 func (t *Team) GetMu() (sum float64) {
