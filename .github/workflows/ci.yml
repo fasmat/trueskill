@@ -1,0 +1,52 @@
+name: CI
+
+# Trigger workflow on pull request or pushes to main branch
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+env:
+  GOLANGCI_LINT_VERSION: v2.1
+
+jobs:
+  lint:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          check-latest: true
+          go-version-file: "go.mod"
+      - uses: golangci/golangci-lint-action@v8
+        with:
+          version: ${{ env.GOLANGCI_LINT_VERSION }}
+
+  unittests:
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 5
+    needs:
+      - lint
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - ubuntu-24.04
+          - macos-15
+          - windows-2025
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          check-latest: true
+          go-version-file: "go.mod"
+
+      - name: Run tests
+        run: |
+          go test -v -race "-coverprofile=coverage.txt" ./...
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v5
+        if: ${{ matrix.os == 'ubuntu-24.04' }}
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
