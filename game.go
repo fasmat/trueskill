@@ -38,12 +38,12 @@ func NewDefaultGame() Game {
 
 // NewGame creates a new game with the specified properties
 //
-//  beta defines how much difference in skill is required to expect the higher
-//    ranked player to win 80% of
-//  tau specifies the increase in variance between games. This ensures that
-//    the rankings stay dynamic. Higher values will make it easier to go up
-//    and down on the ladder, lower ones make it harder.
-//  pDraw specifies the probability of drawing in a random game.
+//	beta defines how much difference in skill is required to expect the higher
+//	  ranked player to win 80% of
+//	tau specifies the increase in variance between games. This ensures that
+//	  the rankings stay dynamic. Higher values will make it easier to go up
+//	  and down on the ladder, lower ones make it harder.
+//	pDraw specifies the probability of drawing in a random game.
 func NewGame(beta, tau, pDraw float64) Game {
 	return Game{
 		beta:  beta,
@@ -56,15 +56,16 @@ func NewGame(beta, tau, pDraw float64) Game {
 // updates their skills accordingly
 func (g *Game) CalcNewRatings(teams []Team, ranks []int) (t []Team, err error) {
 	// TODO
+	_ = teams
+	_ = ranks
 	return
 }
 
 // CalcMatchQuality returns a value that indicates the balance of a game
 // between the provided teams (0.0 = imbalanced, 1.0 = perfectly balanced)
-func (g *Game) CalcMatchQuality(teams []Team) (result float64, err error) {
+func (g *Game) CalcMatchQuality(teams []Team) (float64, error) {
 	if len(teams) > 2 {
-		err = errors.New("CalcMatchQuality does not support more than 2 teams yet.")
-		return
+		return 0, errors.New("does not support more than 2 teams yet")
 	}
 
 	nPlayers := float64(teams[0].Size() + teams[1].Size())
@@ -82,6 +83,5 @@ func (g *Game) CalcMatchQuality(teams []Team) (result float64, err error) {
 		-1 * (t1Mean - t2Mean) * (t1Mean - t2Mean) /
 			(2 * (nPlayers*g.beta*g.beta + t1Var + t2Var)))
 
-	result = sqrt * exp
-	return
+	return sqrt * exp, nil
 }

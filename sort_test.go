@@ -3,6 +3,8 @@ package trueskill
 import "testing"
 
 func TestSortPlayersByRank(t *testing.T) {
+	t.Parallel()
+
 	players := generatePlayers(5)
 
 	dataIn := []Player{
@@ -39,6 +41,7 @@ func TestSortPlayersByRank(t *testing.T) {
 }
 
 func TestSortTeamsByRank(t *testing.T) {
+	t.Parallel()
 
 	players := generatePlayers(5)
 	dataIn := []Team{

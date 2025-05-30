@@ -1,5 +1,7 @@
 package trueskill
 
+import "fmt"
+
 // Team is a composition of players that play together. The skill of a team
 // (µ and σ) is determined by the skills of the players that form the team.
 type Team struct {
@@ -28,13 +30,11 @@ func (t *Team) Size() int {
 // AddPlayer adds a single player to the team.
 func (t *Team) AddPlayer(p Player) {
 	t.players = append(t.players, p)
-	return
 }
 
 // AddPlayers adds players to the team.
 func (t *Team) AddPlayers(p []Player) {
 	t.players = append(t.players, p...)
-	return
 }
 
 // GetPlayers returns the players the team is composed of.
@@ -61,9 +61,10 @@ func (t *Team) GetVar() (sum float64) {
 }
 
 func (t *Team) String() (s string) {
-	s = "Team of " + string(len(t.GetPlayers())) + " Players:"
+	s = fmt.Sprintf("Team of %d Players:", len(t.GetPlayers()))
 	for _, p := range t.GetPlayers() {
-		s += "\t" + p.String()
+		s += "\n\t" + p.String()
 	}
+	s += "\n"
 	return
 }

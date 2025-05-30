@@ -1,3 +1,4 @@
+// Package stats provides functions for calculating probabilities and cumulative distribution functions.
 package stats
 
 import "math"
@@ -96,7 +97,6 @@ func ratEval(a []float64, na int64, b []float64, nb int64, x float64) float64 {
 }
 
 func small(q float64) float64 {
-
 	a := []float64{
 		3.387132872796366608,
 		133.14166789178437745,
@@ -125,7 +125,6 @@ func small(q float64) float64 {
 }
 
 func intermediate(r float64) float64 {
-
 	a := []float64{
 		1.42343711074968357734,
 		4.6303378461565452959,
@@ -153,7 +152,6 @@ func intermediate(r float64) float64 {
 }
 
 func tail(r float64) float64 {
-
 	a := []float64{
 		6.6579046435011037772,
 		5.4637849111641143699,

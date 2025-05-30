@@ -51,7 +51,6 @@ func (p *Player) GetSkill() float64 {
 // UpdateSkill updates the skill rating of player to the provided Gaussian.
 func (p *Player) UpdateSkill(g stats.Gaussian) {
 	p.g = g
-	return
 }
 
 // GetMu is a convenience wrapper for Gaussian.GetMu()
@@ -69,10 +68,11 @@ func (p *Player) GetVar() float64 {
 	return p.g.GetVar()
 }
 
-func (p *Player) String() (s string) {
-	s = "Player [" + string(p.id)
-	s += "] Skill-Estimate:"
-	s += fmt.Sprintf(" %2.4f", p.GetSkill())
-	s += fmt.Sprintf("(μ=%2.4f, σ=%2.4f)", p.GetMu(), p.GetSigma())
-	return
+func (p *Player) String() string {
+	return fmt.Sprintf("Player [%d] Skill-Estimate: %2.4f (μ=%2.4f, σ=%2.4f)",
+		p.id,
+		p.GetSkill(),
+		p.GetMu(),
+		p.GetSigma(),
+	)
 }

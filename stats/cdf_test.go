@@ -10,6 +10,8 @@ const (
 )
 
 func TestNormGaussAt(t *testing.T) {
+	t.Parallel()
+
 	in := []float64{
 		0,
 		1,
@@ -36,6 +38,8 @@ func TestNormGaussAt(t *testing.T) {
 }
 
 func TestGaussAt(t *testing.T) {
+	t.Parallel()
+
 	in := []float64{
 		20,
 		25,
@@ -62,6 +66,8 @@ func TestGaussAt(t *testing.T) {
 }
 
 func TestNormalCDF(t *testing.T) {
+	t.Parallel()
+
 	in := []float64{
 		math.Inf(1),
 		0,
@@ -99,6 +105,8 @@ func TestNormalCDF(t *testing.T) {
 }
 
 func TestInverseCDF(t *testing.T) {
+	t.Parallel()
+
 	in := []float64{
 		1,
 		0.5,

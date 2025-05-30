@@ -67,7 +67,7 @@ func (g *Gaussian) String() string {
 
 // MultiplyGaussian multiplies two Gaussian distributions and returns the
 // result as a new Gaussian
-func MultiplyGaussian(fac1 Gaussian, fac2 Gaussian) Gaussian {
+func MultiplyGaussian(fac1, fac2 Gaussian) Gaussian {
 	prod := Gaussian{
 		tau: fac1.tau + fac2.tau,
 		pi:  fac1.pi + fac2.pi,
@@ -97,7 +97,6 @@ func LogProductNormalisation(left, right Gaussian) float64 {
 	logSqrt2Pi := math.Log(math.Sqrt(2 * math.Pi))
 
 	return -logSqrt2Pi - math.Log(varSum/2.0) - (muDiff*muDiff)/(2.0*varSum)
-
 }
 
 // LogRatioNormalisation computes the log-normalisation factor when two
