@@ -63,7 +63,7 @@ func (t *Team) GetVar() (sum float64) {
 	return sum
 }
 
-func (t *Team) String() (s string) {
+func (t *Team) String() string {
 	var b strings.Builder
 	fmt.Fprintf(&b, "Team of %d Players:", len(t.GetPlayers()))
 	for _, p := range t.GetPlayers() {
