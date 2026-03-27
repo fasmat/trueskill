@@ -13,7 +13,7 @@ jobs:
         contents: write
     steps:
       - name: Create Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@1853d73993c8ca1b2c9c1a7fede39682d0ab5c2a # v2.5.3
         with:
           tag_name:  ${{ github.ref_name }}
           body: |

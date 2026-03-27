@@ -1,8 +1,10 @@
-package trueskill
+package trueskill_test
 
 import (
 	"math"
 	"testing"
+
+	"github.com/fasmat/trueskill"
 )
 
 const (
@@ -26,7 +28,7 @@ func TestDrawMarginFromDrawProbability(t *testing.T) {
 	}
 
 	for i, p := range pDraw {
-		e := GetDrawMargin(p, beta, 2)
+		e := trueskill.GetDrawMargin(p, beta, 2)
 		if math.Abs(e-epsilon[i]) > ErrTolerance {
 			t.Error("Expected draw margin for", p, "=", epsilon[i], "got", e)
 		}
@@ -50,7 +52,7 @@ func TestGetDrawProbabilityFromDrawMargin(t *testing.T) {
 	}
 
 	for i, e := range epsilon {
-		p := GetDrawProbability(e, beta, 2)
+		p := trueskill.GetDrawProbability(e, beta, 2)
 		if math.Abs(p-pDraw[i]) > ErrTolerance {
 			t.Error("Expected draw probability for", e, "=", pDraw[i], "got", p)
 		}
