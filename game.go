@@ -58,7 +58,7 @@ func (g *Game) CalcNewRatings(teams []Team, ranks []int) (t []Team, err error) {
 	// TODO(mafa): implement me
 	_ = teams
 	_ = ranks
-	return
+	return t, err
 }
 
 // CalcMatchQuality returns a value that indicates the balance of a game

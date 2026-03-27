@@ -1,13 +1,17 @@
-package trueskill
+package trueskill_test
 
-import "testing"
+import (
+	"testing"
+
+	"github.com/fasmat/trueskill"
+)
 
 func TestSortPlayersByRank(t *testing.T) {
 	t.Parallel()
 
 	players := generatePlayers(5)
 
-	dataIn := []Player{
+	dataIn := []trueskill.Player{
 		players[0],
 		players[4],
 		players[3],
@@ -17,7 +21,7 @@ func TestSortPlayersByRank(t *testing.T) {
 
 	rankIn := []int{0, 4, 3, 1, 2}
 
-	data, rank := SortPlayersByRank(dataIn, rankIn)
+	data, rank := trueskill.SortPlayersByRank(dataIn, rankIn)
 
 	if len(data) != len(players) {
 		t.Error("Lost data values during sorting. Expected",
@@ -44,25 +48,25 @@ func TestSortTeamsByRank(t *testing.T) {
 	t.Parallel()
 
 	players := generatePlayers(5)
-	dataIn := []Team{
-		NewTeam([]Player{players[4]}),
-		NewTeam([]Player{players[3]}),
-		NewTeam([]Player{players[2]}),
-		NewTeam([]Player{players[1]}),
-		NewTeam([]Player{players[0]}),
+	dataIn := []trueskill.Team{
+		trueskill.NewTeam([]trueskill.Player{players[4]}),
+		trueskill.NewTeam([]trueskill.Player{players[3]}),
+		trueskill.NewTeam([]trueskill.Player{players[2]}),
+		trueskill.NewTeam([]trueskill.Player{players[1]}),
+		trueskill.NewTeam([]trueskill.Player{players[0]}),
 	}
 	rankIn := []int{5, 4, 3, 1, 1}
 
-	dataOut := []Team{
-		NewTeam([]Player{players[1]}),
-		NewTeam([]Player{players[0]}),
-		NewTeam([]Player{players[2]}),
-		NewTeam([]Player{players[3]}),
-		NewTeam([]Player{players[4]}),
+	dataOut := []trueskill.Team{
+		trueskill.NewTeam([]trueskill.Player{players[1]}),
+		trueskill.NewTeam([]trueskill.Player{players[0]}),
+		trueskill.NewTeam([]trueskill.Player{players[2]}),
+		trueskill.NewTeam([]trueskill.Player{players[3]}),
+		trueskill.NewTeam([]trueskill.Player{players[4]}),
 	}
 	rankOut := []int{1, 1, 3, 4, 5}
 
-	data, rank := SortTeamsByRank(dataIn, rankIn)
+	data, rank := trueskill.SortTeamsByRank(dataIn, rankIn)
 
 	if len(data) != len(dataOut) {
 		t.Error("Lost data values during sorting. Expected",
@@ -87,11 +91,11 @@ func TestSortTeamsByRank(t *testing.T) {
 	}
 }
 
-func generatePlayers(n int) []Player {
-	p := make([]Player, n)
+func generatePlayers(n int) []trueskill.Player {
+	p := make([]trueskill.Player, n)
 
-	for i := 0; i < n; i++ {
-		p[i] = NewDefaultPlayer(i)
+	for i := range p {
+		p[i] = trueskill.NewDefaultPlayer(i)
 	}
 	return p
 }

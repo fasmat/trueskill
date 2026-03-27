@@ -1,8 +1,10 @@
-package stats
+package stats_test
 
 import (
 	"math"
 	"testing"
+
+	"github.com/fasmat/trueskill/stats"
 )
 
 const (
@@ -30,7 +32,7 @@ func TestNormGaussAt(t *testing.T) {
 	}
 
 	for i, v := range in {
-		result := NormGaussAt(v)
+		result := stats.NormGaussAt(v)
 		if math.Abs(result-out[i]) > ErrTolerance {
 			t.Error("Expected", out[i], "got", result, "for", v)
 		}
@@ -58,7 +60,7 @@ func TestGaussAt(t *testing.T) {
 	}
 
 	for i, v := range in {
-		result := GaussAt(v, 20, 5)
+		result := stats.GaussAt(v, 20, 5)
 		if math.Abs(result-out[i]) > ErrTolerance {
 			t.Error("Expected", out[i], "got", result, "for", v)
 		}
@@ -76,7 +78,7 @@ func TestNormalCDF(t *testing.T) {
 		-1,
 		2,
 		-2,
-		InverseCDF(0.86),
+		stats.InverseCDF(0.86),
 	}
 
 	// These results were calculated using pnorm(x) on www.r-fiddle.org
@@ -96,7 +98,7 @@ func TestNormalCDF(t *testing.T) {
 	}
 
 	for i := range in {
-		o := NormalCDF(in[i])
+		o := stats.NormalCDF(in[i])
 
 		if math.Abs(o-out[i]) > ErrTolerance {
 			t.Errorf("NormalCDF(%f) == %f, want %f", in[i], o, out[i])
@@ -116,7 +118,7 @@ func TestInverseCDF(t *testing.T) {
 		0.9,
 		-1,
 		2,
-		NormalCDF(4),
+		stats.NormalCDF(4),
 	}
 
 	// These results were calculated using qnorm(x) on www.r-fiddle.org
@@ -137,7 +139,7 @@ func TestInverseCDF(t *testing.T) {
 	}
 
 	for i := range in {
-		o := InverseCDF(in[i])
+		o := stats.InverseCDF(in[i])
 
 		if math.Abs(o-out[i]) > ErrTolerance {
 			t.Errorf("InverseCDF(%f) == %f, want %f", in[i], o, out[i])

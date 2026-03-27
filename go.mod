@@ -1,3 +1,3 @@
 module github.com/fasmat/trueskill
 
-go 1.6
+go 1.26.1
