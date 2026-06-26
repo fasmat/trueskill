@@ -19,7 +19,7 @@
 		"type=bind,source=${localEnv:HOME}${localEnv:USERPROFILE}/.gitignore_global,destination=/home/vscode/.gitignore_global"
 	],
 	"features": {
-		"ghcr.io/devcontainers/features/docker-in-docker:3": {
+		"ghcr.io/devcontainers/features/docker-in-docker:4": {
 			"version": "28.1"
 		},
 		"ghcr.io/devcontainers/features/github-cli:1": {
